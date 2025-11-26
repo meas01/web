@@ -1,11 +1,10 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <HelloWorld/>
 </template>
+<script setup>
+import HelloWorld from './components/HelloWorld.vue';
 
+</script>
 <style scoped>
 .logo {
   height: 6em;
