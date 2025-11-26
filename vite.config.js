@@ -1,6 +1,17 @@
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue()
+  ],
+  build: {
+    outDir: 'dist/client',
+    rollupOptions: {
+      input: './index.html'
+    }
+  },
+  ssr: {
+    noExternal: ['vue']
+  }
 })
