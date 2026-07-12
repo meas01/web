@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Check Environment') {
             steps {
                 sh 'node -v'
@@ -19,19 +18,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('Apps/web') {
+                    sh 'npm install --include=dev'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                dir('Apps/web') {
+                    sh 'npm run build'
+                }
             }
         }
 
         stage('Archive Build') {
             steps {
-                archiveArtifacts artifacts: 'dist/**', fingerprint: true
+                dir('Apps/web') {
+                    archiveArtifacts artifacts: 'dist/**', fingerprint: true
+                }
             }
         }
     }
