@@ -34,11 +34,14 @@ pipeline {
 
         stage('Archive Build') {
             steps {
-                dir('Apps/web') {
-                    sh 'pwd'
-                    sh 'ls -la'
-                    sh 'find . -maxdepth 3 -type d -name dist -print'
-                    archiveArtifacts artifacts: 'dist/**', allowEmptyArchive: true, fingerprint: true
+                script {
+                    def artifactDir = 'Apps/web/dist'
+                    if (fileExists(artifactDir)) {
+                        archiveArtifacts artifacts: 'Apps/web/dist/**', fingerprint: true
+                        echo "Archived build artifacts from ${artifactDir}"
+                    } else {
+                        echo "No build artifacts found under ${artifactDir}; skipping archive."
+                    }
                 }
             }
         }
