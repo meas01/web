@@ -37,7 +37,7 @@ pipeline {
                 dir('Apps/web') {
                     sh 'pwd'
                     sh 'ls -la'
-                    sh 'find . -maxdepth 3 \( -path "./dist" -o -path "./dist/*" \) -print'
+                    sh 'find . -maxdepth 3 -type d -name dist -print'
                     archiveArtifacts artifacts: 'dist/**', allowEmptyArchive: true, fingerprint: true
                 }
             }
