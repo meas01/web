@@ -35,7 +35,7 @@ pipeline {
         stage('Archive Build') {
             steps {
                 dir('Apps/web') {
-                    archiveArtifacts artifacts: 'dist/**', fingerprint: true
+                    archiveArtifacts artifacts: '**/dist/**', fingerprint: true
                 }
             }
         }
