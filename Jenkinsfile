@@ -35,7 +35,10 @@ pipeline {
         stage('Archive Build') {
             steps {
                 dir('Apps/web') {
-                    archiveArtifacts artifacts: '**/dist/**', fingerprint: true
+                    sh 'pwd'
+                    sh 'ls -la'
+                    sh 'find . -maxdepth 3 \( -path "./dist" -o -path "./dist/*" \) -print'
+                    archiveArtifacts artifacts: 'dist/**', allowEmptyArchive: true, fingerprint: true
                 }
             }
         }
